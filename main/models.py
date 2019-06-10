@@ -16,3 +16,4 @@ class Experiencia(models.Model):
     FechaFin = models.DateTimeField( auto_noe=True, verbose_name = "FECHAFINAL")
     Funciones = models.CharField(max_length = 500, default = "", verbose_name = "FUNCION")
     Logros = models.CharField(max_length = 500, default = "", verbose_name = "LOGRO")
+
