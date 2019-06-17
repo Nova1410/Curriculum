@@ -1,0 +1,176 @@
+<!-- Incluimos nuestra plantilla base -->
+{% extends './base.html' %}
+
+<!-- Ponemos el título de la página -->
+{% block title %} Conocenos {% endblock %}
+
+<!-- Marcamos el inicio del contenido -->
+{% block content %}
+
+<!-- Archivos estáticos -->
+{% load static %}
+
+    <!-- #region Modal -->
+    <div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="#" alt="Imagen Login" class="imgLogin mb-4" />
+                    <form action="./perfil2.html" method="post">
+                        <div class="form-label-group">
+                            <input type="email" name="txtEmail" class="form-control"
+                                placeholder="Ingrese su Correo Electronico" required>
+                            <label for="inputEmail">Correo Electronico</label>
+                        </div>
+                        <div class="form-label-group">
+                            <input type="password" name="txtContrasena" class="form-control"
+                                placeholder="Ingrese su Contraseña" required>
+                            <label for="inputPassword">Contraseña</label>
+                        </div>
+                        <div class="form-label-group text-center">
+                            <a href="../perfil" class="btn btnPagina px-5">Enviar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #endregion -->
+    <!-- #region Menu-->
+    <nav class="navbar navbar-expand-lg bg-dark pt-4">
+        <a class="navbar-brand" href="#">CurriculumYa</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav my-2 my-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../">Inicio <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <p class="nav-link btnModal" data-toggle="modal" data-target="#ModalLogin">Iniciar sesión</p>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- #endregion -->
+
+    <section>
+        <!-- Nosotros -->
+        <!--<a name="nuestroequipo"></a>-->
+        <h3 class="text-center">Nuestro equipo</h3>
+        <div class="row mt-3 mb-5">
+            <!--Aqui van la sección de los links-->
+            <div class="container mt-5 mb-1 text-center">
+                <div class="row justify-content-center">
+                    <div class="col-sm-2 blqIcono">
+                        <a href="http://instagram.com/Krathmo">
+                            <img class="iconInt img-thumbnail" src="{% static '/img/David.jpg' %}" alt="Foto integrante">
+                        </a>
+                        <h5 class="mt-3">David Agudelo</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="http://instagram.com/juan_n1410">
+                            <img class="iconInt img-thumbnail" src="{% static '/img/Juanes.jpg' %}" alt="Foto integrante">
+                        </a>
+                        <h5 class="mt-3">Juan Cortés</h5>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <a href="http://instagram.com/juandastick">
+                            <img class="iconInt img-thumbnail" src="{% static '/img/Juanda.jpg' %}" alt="Foto integrante">
+                        </a>
+                        <h5 class="mt-3">Juan David Correa</h5>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="http://instagram.com/tears_spirit">
+                            <img class="iconInt img-thumbnail" src="{% static '/img/Mateo.jpg' %}" alt="Foto integrante">
+                        </a>
+                        <h5 class="mt-3">Mateo Pabón</h5>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <hr class="blq">
+        <!-- Entidades que nos apoyan -->
+        <!--<a name="entidades"></a>-->
+        <h3 class="text-center">Entidades que nos apoyan</h3>
+        <div class="row mt-3 mb-5">
+            <!--Aqui van la sección de los links-->
+            <div class="container mt-5 text-center">
+                <div class="row justify-content-center">
+                    <div class="col-sm-2">
+                        <img class="iconInt img-thumbnail" src="{% static '/img/logoSena.png' %}" alt="Foto empresa">
+                        <h5 class="mt-3">SENA</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5 justify-content-center">
+            <div class="row">
+                <div class="col-sm-3 text-center">
+                    <!-- <div class="bg-secondary iconEmpresas"></div> -->
+                    <i class="fab fa-html5 iconTecnologias"></i>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <i class="fab fa-css3-alt iconTecnologias"></i>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <i class="fab fa-js iconTecnologias"></i>
+                </div>
+                <div class="col-sm-3 text-center">
+                    <i class="fab fa-python iconTecnologias"></i>
+                </div>
+            </div>
+        </div>
+        <!--
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <i class="fab fa-php iconTec" style="color:#3f51b5;"></i>
+        </div>
+    </div>
+-->
+        <hr>
+        <footer>
+            <div class="container-fluid mt-5 pt-1 footer">
+                <div class="container-fluid">
+                    <div class="row p-5">
+                        <div class="col-sm-3 mx-auto">
+                            <h6 class=" font-weight-bold">INICIO</h6>
+                            <hr>
+                            <small>
+
+                            </small>
+                        </div>
+                        <div class="col-sm-3 mx-auto">
+                            <h6 class="font-weight-bold">INFORMACIÓN</h6>
+                            <hr>
+                            <small>
+
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid bg-dark">
+                <div class="row">
+                    <div class="col-sm-12 text-center text-white py-2">
+                        <i class="far fa-copyright"></i>CurriculumYa 2019
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </section>
+    {% endblock %}
