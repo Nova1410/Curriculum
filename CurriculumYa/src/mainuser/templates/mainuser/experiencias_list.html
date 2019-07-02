@@ -1,0 +1,42 @@
+<div class="card mb-3 mt-3 border-0">
+    <div class="row no-gutters justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+
+                <table class="table table-bordered table-sm tblProyect">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">País</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Inicio</th>
+                            <th scope="col">Fin</th>
+                            <th scope="col">Función</th>
+                            <th scope="col">Logros</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for dato in experiencias %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{dato.IdCargos}}</td>
+                            <td>{{dato.IdPaises}}</td>
+                            <td>{{dato.IdDepartamentos}}</td>
+                            <td>{{dato.IdCiudades}}</td>
+                            <td>{{dato.Empresa}}</td>
+                            <td>{{dato.FechaIni}}</td>
+                            <td>{{dato.FechaFin}}</td>
+                            <td>{{dato.Funciones}}</td>
+                            <td>{{dato.Logros}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

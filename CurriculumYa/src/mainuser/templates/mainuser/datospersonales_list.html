@@ -1,0 +1,59 @@
+{% for item in datosusuario %}
+<div class="card mb-3 mt-3 border-0">
+        <div class="row no-gutters">
+            <div class="col-md-3 justify-content-center">
+                <i class="fas fa-user-tie fa-7x p-5 card-img"></i>
+                <div class="form-group ml-3">
+                    <input type="file" name="file" id="file" class="inputfile" />
+                    <label for="file"><i class="fas fa-upload mr-3"></i>Seleccionar</label>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card-body">
+
+                    <div class="form-row justify-content-center mt-1">
+                        <div class="form-group col-md-2">
+                            <label for="TipoDoc">Tipo de documento</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" value='{{item.IdTipoDocu}}' disabled>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center mt-1">
+                        <div class="form-group col-md-2">
+                            <label for="Iduser">Numero de documento</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input id="IdUser" type="text" class="form-control" value='{{item.IdUsuarios}}' disabled>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center mt-1">
+                        <div class="form-group col-md-2">
+                            <label for="Genero">Genero</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" value='{{item.Genero}}' disabled>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center mt-1">
+                        <div class="form-group col-md-2">
+                            <label for="Etnia">Etnia</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" value='{{item.IdEtnias}}' disabled>
+                        </div>
+                    </div>
+                    <div class="form-row justify-content-center mt-1">
+                        <div class="form-group col-md-2">
+                            <label for="Estado">Estado civil</label>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" value='{{item.IdEstaCivil}}' disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

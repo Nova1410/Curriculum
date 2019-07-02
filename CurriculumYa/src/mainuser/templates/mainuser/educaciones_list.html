@@ -1,0 +1,36 @@
+<div class="card mb-3 mt-3 border-0">
+    <div class="row no-gutters justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <table class="table table-bordered tblEduc">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">País</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Ciudad</th>
+                            <th scope="col">Instituto</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Fecha grado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for item in educaciones %}
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{item.IdTipoEstu}}</td>
+                            <td>{{item.IdPaises}}</td>
+                            <td>{{item.IdDepartamentos}}</td>
+                            <td>{{item.IdCiudades}}</td>
+                            <td>{{item.Instituto}}</td>
+                            <td>{{item.Titulo}}</td>
+                            <td>{{item.FechGrado}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

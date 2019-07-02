@@ -1,0 +1,129 @@
+<!-- Incluimos nuestra plantilla base -->
+{% extends './base.html' %}
+
+<!-- Ponemos el título de la página -->
+{% block title %} Registrate {% endblock %}
+
+<!-- Marcamos el inicio del contenido -->
+{% block content %}
+
+<!-- Archivos estáticos -->
+{% load static %}
+
+<!-- #region Menu-->
+<nav class="navbar navbar-expand-lg bg-dark pt-4 text-white">
+    <a class="navbar-brand" href="#">CurriculumYa</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'usuario:logout' %}">Cerrar sesión<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- #endregion -->
+<section class="container mt-5">
+    <div class="row">
+        <!-- #region Datos básicos -->
+        {% include 'mainuser/perfil_list.html' %}
+        <!-- #endregion -->
+
+        <!-- #region Hoja de vida -->
+        <div class="col-md-10">
+
+            <!-- #region Títulos -->
+            <div class="card text-center">
+                <div class="card-header bg-dark">
+                    <ul class="nav nav-tabs card-header-tabs justify-content-center bg-dark text-white  ">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="Datos-tab" data-toggle="tab" aria-controls="datos"
+                                aria-selected="true" role="tab" href="#Datos">Datos personales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="DatosG-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#DatosG">Datos generales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Perfil-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Perfil">Perfil profesional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Educ-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Educ">Educaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Exp-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Exp">Experiencias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Habilidades-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Habilidades">Habilidades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Logros-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Logros">Logros</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- #endregion -->
+
+            <div class="card-body border">
+
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="tab-pane fade show active" id="Datos" role="tabpanel" aria-labelledby="datos-tab">
+                            {% include 'mainuser/datospersonales_list.html' %}
+                    </div>
+
+
+                    <div class="tab-pane fade show" id="DatosG" role="tabpanel" aria-labelledby="datosG-tab">
+                            {% include 'mainuser/datosgenerales_list.html' %}
+                    </div>
+
+
+                    <div class="tab-pane fade show" id="Perfil" role="tabpanel" aria-labelledby="Perfil-tab">
+                            {% include 'mainuser/PerfilProfesional_list.html' %}
+                    </div>
+
+                    
+                    <div class="tab-pane fade show" id="Educ" role="tabpanel" aria-labelledby="Educ-tab">
+                            {% include 'mainuser/educaciones_list.html' %}
+                    </div>
+
+
+                    <div class="tab-pane fade show" id="Exp" role="tabpanel" aria-labelledby="Exp-tab">
+                            {% include 'mainuser/experiencias_list.html' %}
+                    </div>
+
+
+                    <div class="tab-pane fade show" id="Habilidades" role="tabpanel" aria-labelledby="Habilidades-tab">
+                            {% include 'mainuser/habilidades_list.html' %}
+                    </div>
+
+                    <div class="tab-pane fade show" id="Logros" role="tabpanel" aria-labelledby="Logros-tab">
+                            {% include 'mainuser/logros_list.html' %}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3 mb-3">
+                        <a id="BtnActualizar" href="{% url 'usuario:update' %}" class="btn btn-dark">Actualizar</a>
+                    </div>
+            </div>
+            
+        </div>
+        <!-- #endregion -->
+
+    </div>
+</section>
+
+<script src="{% static './js/script.js' %}"></script> 
+
+{% endblock %}

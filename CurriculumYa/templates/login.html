@@ -1,0 +1,45 @@
+<!-- Incluimos nuestra plantilla base -->
+{% extends './base.html' %}
+
+<!-- Ponemos el título de la página -->
+{% block title %} Tu hoja de vida online {% endblock %}
+
+<!-- Marcamos el inicio del contenido -->
+{% block content %}
+
+
+<!-- Archivos estáticos -->
+{% load static %}
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'inicio:login' %}">
+    {% csrf_token %}
+
+    <div>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+    </div>
+    <div>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+    </div>
+
+    <div>
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+</form>
+
+{% endblock %}

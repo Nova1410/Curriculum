@@ -1,0 +1,12 @@
+{% for items in perfil %}
+<!-- #region Datos básicos -->
+<div class="col-md-2 card bg-dark text-white colDatos">
+    <i class="fas fa-user-tie fa-7x card-img p-4"></i>
+    <div class="card-body justify-content-center">
+        <h3 class="card-title">{{items.user.first_name}} {{items.user.last_name}}</h3>
+        <p class="card-text">Título: {{items.Titulo}}</p>
+        <p class="card-text">Ocupación: {{items.Ocup}}</p>
+    </div>
+</div>
+<!-- #endregion -->
+{% endfor %}

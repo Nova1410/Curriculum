@@ -1,0 +1,30 @@
+<div class="card mb-3 mt-3 border-0">
+    <div class="row no-gutters justify-content-center">
+        <div class="col-md-12">
+            <div class="card-body">
+                <table class="table table-bordered tblLogros">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in logros %}
+                        <tr>
+                            <th scope="row">{{forloop.counter}}</th>
+                            <td>{{item.idTipoLogr}}</td>
+                            <td>{{item.FechLogr}}</td>
+                            <td>{{item.NombrLogr}}</td>
+                            <td>{{item.DescLogr}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

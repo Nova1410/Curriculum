@@ -1,0 +1,145 @@
+<!-- Incluimos nuestra plantilla base -->
+{% extends './base.html' %}
+
+<!-- Ponemos el título de la página -->
+{% block title %} Registrate {% endblock %}
+
+<!-- Marcamos el inicio del contenido -->
+{% block content %}
+
+<!-- Archivos estáticos -->
+{% load static %}
+
+<!-- #region Modal -->
+<div class="modal fade" id="ModalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <img src="#" alt="Imagen Login" class="imgLogin mb-4" />
+        <form action="./perfil2.html" method="post">
+          <div class="form-label-group">
+            <input type="email" name="txtEmail" class="form-control" placeholder="Ingrese su Correo Electronico"
+              required>
+            <label for="inputEmail">Correo Electronico</label>
+          </div>
+          <div class="form-label-group">
+            <input type="password" name="txtContrasena" class="form-control" placeholder="Ingrese su Contraseña"
+              required>
+            <label for="inputPassword">Contraseña</label>
+          </div>
+          <div class="form-label-group text-center">
+            <a href="../perfil" class="btn btnPagina px-5">Enviar</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- #endregion -->
+<!-- #region Menu-->
+<nav class="navbar navbar-expand-lg bg-dark pt-4">
+  <a class="navbar-brand" href="#">CurriculumYa</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <ul class="navbar-nav my-2 my-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="..">Inicio <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../nosotros">Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <p class="nav-link btnModal" data-toggle="modal" data-target="#ModalLogin">Iniciar sesión</p>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- #endregion -->
+<section class="p-4">
+  <h1 class="display-4 text-center">Registrate</h1>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="formularioRegistro">
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          {{formUser.email.label_tag}}
+          {{formUser.email}}
+        </div>
+        <div class="col-sm-4">
+            <label for="id_confirmarPass">Confirmar Email</label>
+          <input type="email" name="confirmarEmail" id="id_confirmarEmail" class="form-control">
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          {{formPerfil.IdTipoDocu.label_tag}}
+          {{formPerfil.IdTipoDocu}}
+        </div>
+        <div class="col-sm-4">
+          {{formPerfil.IdUsuarios.label_tag}}
+          {{formPerfil.IdUsuarios}}
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          {{formUser.first_name.label_tag}}
+          {{formUser.first_name}}
+        </div>
+        <div class="col-sm-4">
+          {{formUser.last_name.label_tag}}
+          {{formUser.last_name}}
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          <label for="">Ocupacion</label>
+          {{formPerfil.Ocup}}
+        </div>
+        <div class="col-sm-4">
+          <label for="">Titulo</label>
+          {{formPerfil.Titulo}}
+        </div>
+      </div>
+      <br>
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          {{formUser.username.label_tag}}
+          {{formUser.username}}
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-4">
+          {{formUser.password.label_tag}}
+          {{formUser.password}}
+        </div>
+        <div class="col-sm-4">
+          <label for="id_ConfirmarPass">Confirmar contraseña</label>
+          <input type="password" name="confirmarPass"  id="id_confirmarPass" class="form-control">
+        </div>
+      </div>
+      <br><br>
+      <div class="text-center">
+        <input type="checkbox" aria-label="Checkbox for following text input"> Acepta los <a href="#"
+          class="linkRegistro">Terminos Y
+          Condiciones</a>
+        <br><br>
+        <input type="checkbox" aria-label="Checkbox for following text input"> Acepta que mandemos ofertas a su correo
+        electronico
+        <br><br>
+        <button type="submit" class="btn btnPagina">Enviar</button>
+      </div>
+    </div>
+  </form>
+</section>
+{% endblock %}

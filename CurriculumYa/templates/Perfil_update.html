@@ -1,0 +1,429 @@
+<!-- Incluimos nuestra plantilla base -->
+{% extends './base.html' %}
+
+<!-- Ponemos el título de la página -->
+{% block title %} Registrate {% endblock %}
+
+<!-- Marcamos el inicio del contenido -->
+{% block content %}
+
+<!-- Archivos estáticos -->
+{% load static %}
+
+
+<!-- #region Menu-->
+<nav class="navbar navbar-expand-lg bg-dark pt-4 text-white">
+    <a class="navbar-brand" href="#">CurriculumYa</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+        </ul>
+        <ul class="navbar-nav my-2 my-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'usuario:logout' %}">Cerrar sesión<span
+                        class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<!-- #endregion -->
+<section class="container mt-5">
+    {% if 'Alert' in request.GET %}
+    <div class="alert alertas {{request.GET.Alert}} fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ request.GET.msj }}
+    </div>
+    {% else %}
+
+    {% endif %}
+    <div class="row">
+        <!-- #region Datos básicos -->
+        <div class="col-md-2 card bg-dark text-white colDatos">
+            <i class="fas fa-user-tie fa-7x card-img p-4"></i>
+            <div class="card-body justify-content-center">
+                <h3 id="nombreUser" class="card-title">{{forms.usuarioForm.first_name.value|default_if_none:""}}
+                    {{forms.usuarioForm.last_name.value|default_if_none:""}}</h3>
+                <p id="tituloUser" class="card-text">Título: {{forms.perfilForm.Titulo.value|default_if_none:""}}</p>
+                <p id="ocupUser" class="card-text">Ocupación: {{forms.perfilForm.Ocup.value|default_if_none:""}}</p>
+                <div class="d-flex justify-content-center">
+                    <button data-toggle="modal" data-target="#modalEditar" class="btn btn-light mt-3">Editar</button>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion -->
+
+        <!-- region Modal-->
+        <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="ModalTitle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="post"> {% csrf_token %}
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalTitle">Editar datos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    {{forms.usuarioForm.first_name.label_tag}}
+                                    {{forms.usuarioForm.first_name}}
+                                </div>
+                                <div class="col-md-6">
+                                    {{forms.usuarioForm.last_name.label_tag}}
+                                    {{forms.usuarioForm.last_name}}
+                                </div>
+                            </div>
+                            <div class="row mt-3 mb-3">
+                                <div class="col-md-11">
+                                    {{forms.usuarioForm.email.label_tag}}
+                                    {{forms.usuarioForm.email}}
+                                </div>
+                            </div>
+                            <div class="row mt-3 mb-3">
+                                <div class="col-md-6">
+                                    {{forms.perfilForm.Titulo.label_tag}}
+                                    {{forms.perfilForm.Titulo}}
+                                </div>
+                                <div class="col-md-6">
+                                    {{forms.perfilForm.Ocup.label_tag}}
+                                    {{forms.perfilForm.Ocup}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                            <input type="submit" class="btn btn-dark" value="Guardar cambios">
+                            <input type="hidden" name="formName" value="userForm">
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--endregion-->
+
+
+        <!-- #region Hoja de vida -->
+        <div class="col-md-10">
+
+            <!-- #region Títulos -->
+            <div class="card text-center">
+                <div class="card-header bg-dark">
+                    <ul class="nav nav-tabs card-header-tabs justify-content-center bg-dark text-white  ">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="Datos-tab" data-toggle="tab" aria-controls="datos"
+                                aria-selected="true" role="tab" href="#Datos">Datos personales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Educ-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Educ">Educaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Exp-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Exp">Experiencias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Habilidades-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Habilidades">Habilidades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="Logros-tab" data-toggle="tab" aria-controls="hoja"
+                                aria-selected="false" role="tab" href="#Logros">Logros</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- #endregion -->
+
+            <div class="card-body border">
+                <form method="post"> {% csrf_token %}
+                    <div class="tab-content" id="myTabContent">
+
+
+                        <div class="tab-pane fade show active" id="Datos" role="tabpanel" aria-labelledby="datos-tab">
+
+                            <div class="card mb-3 mt-3 border-0">
+                                <div class="row no-gutters">
+                                    <div class="col-md-3 justify-content-center">
+                                        <i class="fas fa-user-tie fa-7x p-5 card-img"></i>
+                                        <div class="form-group ml-3">
+                                            <input type="file" name="file" id="file" class="inputfile" />
+                                            <label for="file"><i class="fas fa-upload mr-3"></i>Seleccionar</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-9">
+                                        <div class="card-body">
+
+                                            {{ forms.datospersona }}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tab-pane fade show" id="Educ" role="tabpanel" aria-labelledby="Educ-tab">
+                            <div class="card mb-3 mt-3 border-0">
+                                <div class="row no-gutters justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <table class="table table-bordered tblEduc">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Tipo</th>
+                                                        <th scope="col">País</th>
+                                                        <th scope="col">Departamento</th>
+                                                        <th scope="col">Ciudad</th>
+                                                        <th scope="col">Instituto</th>
+                                                        <th scope="col">Título</th>
+                                                        <th scope="col">Fecha grado</th>
+                                                        <th scope="col">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="EduContent">
+                                                    {{ forms.educacionesForm.management_form }}
+                                                    <input type="hidden" id="educacionesTotal" value="{{forms.educacionesForm|length}}">
+                                                    {% for item in forms.educacionesForm %}
+                                                    <tr class="filaEduc">
+                                                        <th scope="row">{{forloop.counter}}</th>
+                                                        <td>{{item.IdTipoEstu}}</td>
+                                                        <td>{{item.IdPaises}}</td>
+                                                        <td>{{item.IdDepartamentos}}</td>
+                                                        <td>{{item.IdCiudades}}</td>
+                                                        <td>{{item.Instituto}}</td>
+                                                        <td>{{item.Titulo}}</td>
+                                                        <td>{{item.FechGrado}}</td>
+                                                        <td><button data-num="{{forloop.counter}}"
+                                                                class="btn btn-link iconTablas remove-form-row-educaciones"><i
+                                                                    class="fas fa-trash"></i></button></td>
+                                                        <td class="id-row">{{item.id}}</td>
+                                                        <td class="user-row">{{item.IdUsuarios}}</td>
+                                                        <td class="checkboxDelete">
+                                                            {{item.DELETE}}
+                                                        </td>
+                                                    </tr>
+
+                                                    {% endfor %}
+
+                                                </tbody>
+                                            </table>
+                                            <div class="d-flex justify-content-end">
+                                                <button
+                                                    class="btn btn-dark btnsAñadir add-form-row-educaciones">Añadir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade show" id="Exp" role="tabpanel" aria-labelledby="Exp-tab">
+
+                            <div class="card mb-3 mt-3 border-0">
+                                <div class="row no-gutters justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+
+                                            <!-- #region tabla proyectos -->
+                                            <table class="table table-bordered table-sm tblProyect">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Cargo</th>
+                                                        <th scope="col">País</th>
+                                                        <th scope="col">Departamento</th>
+                                                        <th scope="col">Ciudad</th>
+                                                        <th scope="col">Empresa</th>
+                                                        <th scope="col">Inicio</th>
+                                                        <th scope="col">Fin</th>
+                                                        <th scope="col">Función</th>
+                                                        <th scope="col">Logros</th>
+                                                        <th scope="col">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="ExpContent">
+                                                    {{ forms.experienciasForm.management_form }}
+                                                    <input type="hidden" id="experienciasTotal" value="{{forms.experienciasForm|length}}">
+                                                    {% for item in forms.experienciasForm %}
+
+                                                    <tr class="filaExp">
+                                                        <th scope="row">{{forloop.counter}}</th>
+                                                        <td>{{item.IdCargos}}</td>
+                                                        <td>{{item.IdPaises}}</td>
+                                                        <td>{{item.IdDepartamentos}}</td>
+                                                        <td>{{item.IdCiudades}}</td>
+                                                        <td>{{item.Empresa}}</td>
+                                                        <td>{{item.FechaIni}}</td>
+                                                        <td>{{item.FechaFin}}</td>
+                                                        <td>{{item.Funciones}}</td>
+                                                        <td>{{item.Logros}}</td>
+                                                        <td><button data-num="{{forloop.counter}}"
+                                                                class="btn btn-link iconTablas remove-form-row-experiencias"><i
+                                                                    class="fas fa-trash"></i></button></td>
+                                                        <td class="id-row">{{item.id}}</td>
+                                                        <td class="user-row">{{item.IdUsuarios}}</td>
+                                                        <td class="checkboxDelete">
+                                                            {{item.DELETE}}
+                                                        </td>
+                                                    </tr>
+
+                                                    {% endfor %}
+
+                                                </tbody>
+                                            </table>
+
+                                            <div class="d-flex justify-content-end">
+                                                <button
+                                                    class="btn btn-dark btnsAñadir add-form-row-experiencias">Añadir</button>
+                                            </div>
+
+                                            <!-- #endregion -->
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="tab-pane fade show" id="Habilidades" role="tabpanel"
+                            aria-labelledby="Habilidades-tab">
+                            <div class="card mb-3 mt-3 border-0">
+                                <div class="row no-gutters justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <table class="table table-bordered tblHabilidades">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Habilidad</th>
+                                                        <th scope="col">Nivel Habilidad</th>
+                                                        <th scope="col">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="HabContent">
+                                                    {{ forms.habilidadesForm.management_form }}
+                                                    <input type="hidden" id="habilidadesTotal" value="{{forms.habilidadesForm|length}}">
+                                                    {% for item in forms.habilidadesForm %}
+                                                    <tr class="filaHab">
+
+                                                        <th scope="row">{{forloop.counter}}</th>
+                                                        <td>{{item.NombHabil}}</td>
+                                                        <td>{{item.NiveHabil}}</td>
+                                                        <td><button data-num="{{forloop.counter}}"
+                                                                class="btn btn-link iconTablas remove-form-row-habilidades"><i
+                                                                    class="fas fa-trash"></i></button></td>
+
+                                                        <td class="id-row">{{item.id}}</td>
+                                                        <td class="user-row">{{item.IdUsuarios}}</td>
+                                                        <td class="checkboxDelete">
+                                                            {{item.DELETE}}
+                                                        </td>
+                                                    </tr>
+
+                                                    {% endfor %}
+
+                                                </tbody>
+                                            </table>
+                                            <div class="d-flex justify-content-end">
+                                                <button
+                                                    class="btn btn-dark btnsAñadir add-form-row-habilidades">Añadir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade show" id="Logros" role="tabpanel" aria-labelledby="Logros-tab">
+                            <div class="card mb-3 mt-3 border-0">
+                                <div class="row no-gutters justify-content-center">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <table class="table table-bordered tblLogros">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Tipo</th>
+                                                        <th scope="col">Fecha</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Descripción</th>
+                                                        <th scope="col">Eliminar</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="LogContent">
+                                                    {{ forms.logrosForm.management_form }}
+                                                    <input type="hidden" id="logrosTotal" value="{{forms.logrosForm|length}}">
+                                                    {% for item in forms.logrosForm %}
+                                                    <tr class="filaLog">
+                                                        <th scope="row">{{forloop.counter}}</th>
+                                                        <td>{{item.idTipoLogr}}</td>
+                                                        <td>{{item.FechLogr}}</td>
+                                                        <td>{{item.NombrLogr}}</td>
+                                                        <td>{{item.DescLogr}}</td>
+                                                        <td><button data-num="{{forloop.counter}}"
+                                                                class="btn btn-link iconTablas remove-form-row-logros"><i
+                                                                    class="fas fa-trash"></i></button></td>
+                                                        <td class="id-row">{{item.id}}</td>
+                                                        <td class="user-row">{{item.IdUsuarios}}</td>
+                                                        <td class="checkboxDelete">
+                                                            {{item.DELETE}}
+                                                        </td>
+                                                    </tr>
+
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <div class="d-flex justify-content-end">
+                                                <button
+                                                    class="btn btn-dark btnsAñadir add-form-row-logros">Añadir</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="form-row justify-content-center mt-3 mb-3">
+                        <div class="form-group col-sm-1">
+                            <input type="submit" class="btn btn-dark">
+                            <input type="hidden" name="formName" value="multiForm">
+                        </div>
+                        <div class="form-group col-sm-1">
+                            <a href="../perfil" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
