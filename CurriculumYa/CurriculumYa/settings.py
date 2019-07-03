@@ -80,14 +80,15 @@ WSGI_APPLICATION = 'CurriculumYa.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'djongo',
-        #'NAME': 'PracticaDjango',
-        #'HOST': 'mongodb+srv://admin:administrador123abc12@practicadjango-nvxrv.mongodb.net/test?retryWrites=true',
-        #'USER': 'admin',
-        #'PASSWORD': 'administrador123abc12',
         'ENGINE': 'djongo',
         'NAME': 'PracticaCurriculum',
-        'HOST': 'localhost:27017'
+        #'HOST': 'mongodb+srv://admin:administrador123abc12@practicadjango-nvxrv.mongodb.net/test?retryWrites=true',
+        'HOST': 'mongodb+srv://curriculumTeam:equiPoCurriculum123@practicadjango-nvxrv.mongodb.net/test?retryWrites=true&w=majority',
+        'USER': 'curriculumTeam',
+        'PASSWORD': 'equiPoCurriculum123'
+        #'ENGINE': 'djongo',
+        #'NAME': 'PracticaCurriculum',
+        #'HOST': 'localhost:27017'
     }
 }
 
