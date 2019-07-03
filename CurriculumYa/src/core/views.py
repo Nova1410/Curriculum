@@ -90,17 +90,29 @@ def registro(request):
     if request.method == 'POST':
         userRegistro = UserForm(request.POST)
         perfilRegistro = PerfilForm(request.POST)
+        NombUsua = request.POST.get('username', '')
+        print(NombUsua)
+        if (User.objects.filter(username=NombUsua).exists()):
+            return HttpResponseRedirect('registro?Exists=1')
+        else:
+            usernameValido = True
+        print("Hola")
         if userRegistro.is_valid() and perfilRegistro.is_valid():
-            
             #Se traen los datos del formulario para crear el usuario
-            NombUsua = request.POST.get('username', '')
+            
             Email = request.POST.get('email', '')
             Nombres = request.POST.get('first_name', '')
             Apellidos = request.POST.get('last_name', '')
             Contrasena = request.POST.get('password', '')
             #Se crea el usuario pasándole los datos del formulario
-            user = User.objects.create_user(username=NombUsua, password=Contrasena, first_name=Nombres, last_name=Apellidos, email=Email)
-            
+            if (User.objects.filter(email=Email).exists()):
+                return HttpResponseRedirect('registro?Exists=2')
+            else:
+                emailValido = True
+            if usernameValido == True and emailValido == True:
+                user = User.objects.create_user(username=NombUsua, password=Contrasena, first_name=Nombres, last_name=Apellidos, email=Email)
+            usernameValido = False
+            emailValido = False
             #Se trae el dato de tipo de documento y se crea un objeto a partir del valor que escogió el usuario
             IdTipoDocu = request.POST.get('IdTipoDocu','')
 
@@ -114,10 +126,15 @@ def registro(request):
             IdUsuarios = request.POST.get('IdUsuarios','')
             Titulo = request.POST.get('Titulo', '')
             Ocup = request.POST.get('Ocup', '')
-            
+            if (DatosUsua.objects.filter(IdUsuarios=IdUsuarios).exists()):
+                return HttpResponseRedirect('registro?Exists=3')
+            else:
+                idUsuarioValido = True
             #Se crean todos los datos del usuario por defecto
-            Perfil.objects.create(user=user, IdUsuarios=IdUsuarios, Titulo=Titulo, Ocup=Ocup)
-            DatosUsua.objects.create(IdTipoDocu=tipodocu,IdUsuarios=IdUsuarios, IdEstaCivil=idestacivil, IdEtnias=idetnia,IdPaises=0,IdDepartamentos=0,IdCiudades=0,foto="",PerfilPro="",Genero=genero,Telefono="",Direccion="")
+            if(idUsuarioValido==True):
+                Perfil.objects.create(user=user, IdUsuarios=IdUsuarios, Titulo=Titulo, Ocup=Ocup)
+                DatosUsua.objects.create(IdTipoDocu=tipodocu,IdUsuarios=IdUsuarios, IdEstaCivil=idestacivil, IdEtnias=idetnia,IdPaises=0,IdDepartamentos=0,IdCiudades=0,foto="",PerfilPro="",Genero=genero,Telefono="",Direccion="")
+            idUsuarioValido = True
             return redirect('/?OK')
     else:
         userRegistro = UserForm()

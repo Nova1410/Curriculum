@@ -64,6 +64,21 @@
 <!-- #endregion -->
 <section class="p-4">
   <h1 class="display-4 text-center">Registrate</h1>
+  {% if request.GET.Exists == "1" %}
+  <div class="alert alert-danger" role="alert">
+    El usuario ya existe, por favor ingrese un usuario diferente.
+  </div>
+  {% endif%}
+  {% if request.GET.Exists == "2" %}
+  <div class="alert alert-danger" role="alert">
+    Este email ya esta en uso, por favor ingresa un email diferente.
+  </div>
+  {% endif %}
+  {% if request.GET.Exists == "3" %}
+  <div class="alert alert-danger" role="alert">
+    ¡Acaba de ocurrir un error inesperado! Intenta registrarte nuevamente o espera unos minutos.
+  </div>
+  {% endif %}
   <br>
   <form method="POST">
     {% csrf_token %}
