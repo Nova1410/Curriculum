@@ -82,10 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'PracticaCurriculum',
-        #'HOST': 'mongodb+srv://admin:administrador123abc12@practicadjango-nvxrv.mongodb.net/test?retryWrites=true',
-        'HOST': 'mongodb+srv://curriculumTeam:equiPoCurriculum123@practicadjango-nvxrv.mongodb.net/test?retryWrites=true&w=majority',
-        'USER': 'curriculumTeam',
-        'PASSWORD': 'equiPoCurriculum123'
+        #'HOST': 'localhost',
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'root'
         #'ENGINE': 'djongo',
         #'NAME': 'PracticaCurriculum',
         #'HOST': 'localhost:27017'
